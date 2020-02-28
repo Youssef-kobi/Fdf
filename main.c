@@ -6,104 +6,43 @@
 /*   By: yel-kobi <yel-kobi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/16 01:13:03 by yel-kobi          #+#    #+#             */
-/*   Updated: 2020/02/24 23:28:45 by yel-kobi         ###   ########.fr       */
+/*   Updated: 2020/02/27 06:12:48 by yel-kobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <mlx.h>
 #include "fdf.h"
-#include "get_next_line/libft/libft.h"
 
-int     count_line(char **argv)
+int	 main(int argc, char **argv)
 {
-    int     len;
-    char *buff;
-    int fd;
-
-    buff = NULL;
-    len = 0;
-    fd = open(argv[1],O_RDONLY);
-    while (get_next_line(fd, &buff) > 0)
-        len++;
-    free(buff);
-    buff = NULL;
-    close(fd);
-    return(len);
+	t_data	struc;
+	read_file(argv, &struc);
+	struc.zoom_coef = get_zoom_coef(struc);
+	struc.margin = get_margin(struc);
+	struc.angle = 0.50;
+	struc.color = 0;
+	struc.pers = 'p';
+	struc.mlx_ptr = mlx_init();
+	struc.win_ptr = mlx_new_window(struc.mlx_ptr, 1000, 1000, "frst draft");
+	draw(struc);
+	mlx_key_hook(struc.win_ptr, &key_hook, &struc);
+	mlx_loop(struc.mlx_ptr);
+	// int c =0;
+	// while(c < struc.ymax)
+	// {
+	// free (struc.data[c]);
+	// }
+	// printf("dd");
+	return(0);
 }
-void parser(int **coord, char **saved, int len)
-{
-    int x;
-    
-    x = 0;
-    while(x < len)
-    {
-        (*coord)[x]= ft_atoi(saved[x]);
-        free(saved[x++]);
-    }
-}
-int count_len(char **argv,int **coord)
-{
-    int len;
-    char *buff;
-    int fd;
-    char **saved;
-    int last_len;
-    
-    last_len = 0;
-    fd = open(argv[1],O_RDONLY);
-    while (get_next_line(fd, &buff) > 0)
-    {
-        saved = ft_strsplit(buff, ' ');
-        len=0;
-        while(saved[len])
-            len++;
-        if(len >= last_len)
-            if(last_len == 0)
-                last_len=len;
-        else
-            exit ;
-        *coord=(int*)malloc(sizeof(int)*last_len);
-        parser(coord, saved, last_len);
-        coord++;
-        free(buff);
-   }
-   close(fd);
-   return (last_len);
-}
-void read_file(char **argv,void *mlx_ptr, void *win_ptr)
-{
-    int **coord;
-    int lines;
-    int len;
-
-    lines = count_line(argv);
-    coord = (int **)malloc(sizeof (char *)*(lines));
-    len = count_len(argv, coord);
-    draw_para(coord,lines,len,mlx_ptr,win_ptr);
-    // int y =-1;
-    // int x = -1;
-    // while(++y < 11)
-    // {
-    //     x = -1;
-    //     while(++x < 19)
-    //     if(coord[y][x] > 9)
-    //         printf("%d ",coord[y][x]);
-    //     else
-    //         printf("%d  ",coord[y][x]);
-    //     printf("\n");
-    // }
-}
-
-
-int main(int argc, char **argv)
-{   
-    void *mlx_ptr;
-    void *win_ptr;
-
-    
-    mlx_ptr = mlx_init();
-    win_ptr = mlx_new_window(mlx_ptr,500,500,"ptr");
-    read_file(argv,mlx_ptr,win_ptr);
-
-    mlx_loop(mlx_ptr);
-}
+	// int c =0;
+	// int v=0;
+	// while(c < struc.ymax)
+	// {
+	// 	while(v<struc.xmax)
+	// 	{
+	// 		printf("Tab[%d][%d] = %d\n",c,v,struc.data[c][v]);
+	// 		v++;
+	// 	}
+	// v=0;
+	// c++;
+	// }
