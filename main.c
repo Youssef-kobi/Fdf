@@ -26,14 +26,10 @@ int	 main(int argc, char **argv)
 	draw(struc);
 	mlx_key_hook(struc.win_ptr, &key_hook, &struc);
 	mlx_loop(struc.mlx_ptr);
-	// int c =0;
-	// while(c < struc.ymax)
-	// {
-	// free (struc.data[c]);
-	// }
-	// printf("dd");
 	return(0);
 }
+
+
 	// int c =0;
 	// int v=0;
 	// while(c < struc.ymax)

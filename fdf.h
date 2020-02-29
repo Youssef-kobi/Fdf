@@ -38,9 +38,10 @@ int		count_len(char **argv,t_data *struc);
 void	parser(t_data *struc, char **saved, int len);
 int		*get_margin(t_data struc);
 int		get_zoom_coef(t_data struc);
-void	draw_line(int *xy,int *xyf , t_data struc, int c);
+void	draw_line(float *xy,float *xyf , t_data struc, int c);
 void	draw_iso(t_data struc);
 void	draw_para(t_data struc);
 int		key_hook(int key, void *param);
 void	draw(t_data struc);
+void	free_struc(t_data *struc,int exit);
 

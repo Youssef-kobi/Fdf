@@ -41,6 +41,8 @@ void parser(t_data *struc, char **saved, int len)
         struc->data[s][x]= ft_atoi(saved[x]);
         free(saved[x++]);
     }
+    free(saved);
+    saved=NULL;
 	s++;
 }
 int count_len(char **argv,t_data *struc)
@@ -72,10 +74,11 @@ int count_len(char **argv,t_data *struc)
         parser(struc, saved, last_len);
 		x++;
         free(buff);
-        buff = NULL;
    }
-    free(buff);
-    buff = NULL;
+    //free(buff);
+    buff=NULL;
+    // free(saved);
+    // saved=NULL;
    close(fd);
    return (last_len);
 }

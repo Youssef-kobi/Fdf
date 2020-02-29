@@ -19,7 +19,7 @@ int		key_hook(int key, void *param)
 	struc = (t_data*)(param);
 	mlx_clear_window(struc->mlx_ptr, struc->win_ptr);
 	if( key == 53)
-		exit (0);
+		free_struc(struc,53);
 	struc->pers = key == 34 ? 'i' : struc->pers ;
 	struc->pers = key == 35 ? 'p' : struc->pers ;
 	struc->zoom_coef = key == 69 ? struc->zoom_coef + 1 : struc->zoom_coef ;

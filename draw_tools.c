@@ -12,30 +12,26 @@
 
 #include "fdf.h"
 
-void draw_line(int *xy,int *xyf , t_data struc, int c)
+void draw_line(float *xy,float *xyf , t_data struc, int c)
 {
-	int dx;
-	int dy;
+	float dx;
+	float dy;
 	int i;
 	int step;
 	float xinc;
 	float yinc;
-	float x;
-	float y;
 
 	i = 0;
 	dx = xyf[0] - xy[0];
 	dy = xyf[1] - xy[1];
-	step = abs(dx) > abs(dy) ? abs(dx) : abs(dy);
-	x = (float)xy[0];
-	y = (float)xy[1];
-	xinc = (float)dx / (float)step;
-	yinc = (float)dy/ (float)step;
+	step = abs((int)dx) > abs((int)dy) ? abs((int)dx) : abs((int)dy);
+	xinc = dx / (float)step;
+	yinc = dy / (float)step;
 	while (i <= step)
 	{
-		mlx_pixel_put(struc.mlx_ptr, struc.win_ptr, ((int)x + struc.margin[0]), ((int)y + struc.margin[1]), c);
-		x = x + xinc;
-		y = y + yinc ;
+		mlx_pixel_put(struc.mlx_ptr, struc.win_ptr, ((int)xy[0] + struc.margin[0]), ((int)xy[1] + struc.margin[1]), c);
+		xy[0] = xy[0] + xinc;
+		xy[1] = xy[1] + yinc ;
 		i++;
 	}
 }
@@ -45,13 +41,13 @@ void	draw_iso(t_data struc)
 	int x;
 	int y;
 	int c;
-	int *xy;
-	int *xyf;
+	float *xy;
+	float *xyf;
 
 	x = 0;
 	y = 0;
-	xy = (int*)malloc(2 * sizeof(int));
-	xyf = (int*)malloc(2 * sizeof(int));
+	xy = (float*)malloc(2 * sizeof(float));
+	xyf = (float*)malloc(2 * sizeof(float));
 	while (y < struc.ymax)
 	{
 		while(x < struc.xmax)
@@ -79,6 +75,8 @@ void	draw_iso(t_data struc)
 		x = 0;
 		y++;
 	}
+	free(xy);
+	free(xyf);
 }
 
 
@@ -86,15 +84,15 @@ void	draw_para(t_data struc)
 {
 	int x;
 	int y;
-	int *xy;
-	int *xyf;
+	float *xy;
+	float *xyf;
 	int c;
 
 	x = 0;
 	y = 0;
 	c = 0;
-	xy = (int*)malloc(2 * sizeof(int));
-	xyf = (int*)malloc(2 * sizeof(int));
+	xy = (float*)malloc(2 * sizeof(float));
+	xyf = (float*)malloc(2 * sizeof(float));
 	while (y < struc.ymax)
 	{
 		while(x < struc.xmax)
@@ -103,7 +101,7 @@ void	draw_para(t_data struc)
 			xy[1] = y * struc.zoom_coef;
 			if((x + 1) < struc.xmax )
 			{
-				xyf[0] = (x + 1) * struc.zoom_coef;
+				xyf[0] = ((x + 1) * struc.zoom_coef);
 				xyf[1] = y * struc.zoom_coef;
 				c = struc.data[y][x + 1] > 0 ? 0100100220 : 0255000000 ;
 				c = struc.color == 0 ? c : struc.color;
@@ -122,4 +120,8 @@ void	draw_para(t_data struc)
 		x = 0;
 		y++;
 	}
+	free(xy);
+	xy=NULL;
+	free(xyf);
+	xyf=NULL;
 }
