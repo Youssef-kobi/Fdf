@@ -6,7 +6,7 @@
 /*   By: yel-kobi <yel-kobi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/16 01:13:03 by yel-kobi          #+#    #+#             */
-/*   Updated: 2020/02/27 06:12:48 by yel-kobi         ###   ########.fr       */
+/*   Updated: 2020/03/04 12:07:00 by yel-kobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,15 @@
 int	 main(int argc, char **argv)
 {
 	t_data	struc;
+
+	if (argc != 2)
+		ft_error("Usage: ./fdf map.fdf");
 	read_file(argv, &struc);
 	struc.zoom_coef = get_zoom_coef(struc);
 	struc.margin = get_margin(struc);
 	struc.angle = 0.50;
 	struc.color = 0;
-	struc.pers = 'p';
+	struc.pers = 'i';
 	struc.mlx_ptr = mlx_init();
 	struc.win_ptr = mlx_new_window(struc.mlx_ptr, 1000, 1000, "frst draft");
 	draw(struc);

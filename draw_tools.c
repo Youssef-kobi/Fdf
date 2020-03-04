@@ -12,27 +12,26 @@
 
 #include "fdf.h"
 
-void draw_line(float *xy,float *xyf , t_data struc, int c)
+void draw_line(int *xy,int *xyf , t_data struc, int c)
 {
 	float dx;
 	float dy;
-	int i;
 	int step;
-	float xinc;
-	float yinc;
+	float x;
+	float y;
 
-	i = 0;
-	dx = xyf[0] - xy[0];
-	dy = xyf[1] - xy[1];
+	dx = (float)xyf[0] - (float)xy[0];
+	dy = (float)xyf[1] - (float)xy[1];
 	step = abs((int)dx) > abs((int)dy) ? abs((int)dx) : abs((int)dy);
-	xinc = dx / (float)step;
-	yinc = dy / (float)step;
-	while (i <= step)
+	dx /= ((float)step);
+	dy /= ((float)step);
+	x = (float)xy[0];
+	y = (float)xy[1];
+	while (step--)
 	{
-		mlx_pixel_put(struc.mlx_ptr, struc.win_ptr, ((int)xy[0] + struc.margin[0]), ((int)xy[1] + struc.margin[1]), c);
-		xy[0] = xy[0] + xinc;
-		xy[1] = xy[1] + yinc ;
-		i++;
+		mlx_pixel_put(struc.mlx_ptr, struc.win_ptr, ((int)x + struc.margin[0]), ((int)y + struc.margin[1]), c);
+		x = x + dx;
+		y = y + dy ;
 	}
 }
 
@@ -41,13 +40,13 @@ void	draw_iso(t_data struc)
 	int x;
 	int y;
 	int c;
-	float *xy;
-	float *xyf;
+	int *xy;
+	int *xyf;
 
 	x = 0;
 	y = 0;
-	xy = (float*)malloc(2 * sizeof(float));
-	xyf = (float*)malloc(2 * sizeof(float));
+	xy = (int*)malloc(2 * sizeof(int));
+	xyf = (int*)malloc(2 * sizeof(int));
 	while (y < struc.ymax)
 	{
 		while(x < struc.xmax)
@@ -84,15 +83,15 @@ void	draw_para(t_data struc)
 {
 	int x;
 	int y;
-	float *xy;
-	float *xyf;
+	int *xy;
+	int *xyf;
 	int c;
 
 	x = 0;
 	y = 0;
 	c = 0;
-	xy = (float*)malloc(2 * sizeof(float));
-	xyf = (float*)malloc(2 * sizeof(float));
+	xy = (int*)malloc(2 * sizeof(int));
+	xyf = (int*)malloc(2 * sizeof(int));
 	while (y < struc.ymax)
 	{
 		while(x < struc.xmax)
@@ -101,6 +100,7 @@ void	draw_para(t_data struc)
 			xy[1] = y * struc.zoom_coef;
 			if((x + 1) < struc.xmax )
 			{
+				ft_putchar('Z');
 				xyf[0] = ((x + 1) * struc.zoom_coef);
 				xyf[1] = y * struc.zoom_coef;
 				c = struc.data[y][x + 1] > 0 ? 0100100220 : 0255000000 ;

@@ -6,7 +6,7 @@
 /*   By: yel-kobi <yel-kobi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/27 05:48:51 by yel-kobi          #+#    #+#             */
-/*   Updated: 2020/02/27 05:53:18 by yel-kobi         ###   ########.fr       */
+/*   Updated: 2020/03/04 11:36:14 by yel-kobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,17 @@ int		key_hook(int key, void *param)
 }
 void	draw(t_data struc)
 {
-	mlx_string_put(struc.mlx_ptr, struc.win_ptr, 10, 840, 0255000000, "(i / p) to change perspective");
-	mlx_string_put(struc.mlx_ptr, struc.win_ptr, 10, 860, 0255000000, "(+ / -) to zoom in or out");
-	mlx_string_put(struc.mlx_ptr, struc.win_ptr, 10, 880, 0255000000, "(r / g / b / 0) to change colors");
-	mlx_string_put(struc.mlx_ptr, struc.win_ptr, 10, 900, 0255000000, "(page-up / page-down) to change perspective angle");
-	mlx_string_put(struc.mlx_ptr, struc.win_ptr, 10, 920, 0255000000, "(Arrows) to move perspective point");
-	mlx_string_put(struc.mlx_ptr, struc.win_ptr, 10, 940, 0255000000, "(ESC) to quit");
+	void *m;
+	void *w;
+
+	m = struc.mlx_ptr;
+	w = struc.win_ptr;
+	mlx_string_put(m, w, 10, 840, 0255000000, "(i / p) to change perspective");
+	mlx_string_put(m, w, 10, 860, 0255000000, "(+ / -) to zoom in or out");
+	mlx_string_put(m, w, 10, 880, 0255000000, "(r / g / b / 0) to change colors");
+	mlx_string_put(m, w, 10, 900, 0255000000, "(page-up / page-down) to change perspective angle");
+	mlx_string_put(m, w, 10, 920, 0255000000, "(Arrows) to move perspective point");
+	mlx_string_put(m, w, 10, 940, 0255000000, "(ESC) to quit");
 	if (struc.pers == 'i')
 		draw_iso(struc);
 	else
