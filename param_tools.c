@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   param_tools.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yel-kobi <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: yel-kobi <yel-kobi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/27 05:42:21 by yel-kobi          #+#    #+#             */
-/*   Updated: 2020/03/05 01:04:20 by yel-kobi         ###   ########.fr       */
+/*   Updated: 2020/03/05 01:19:27 by ytourame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ int		*get_margin(t_data struc)
 	int *xy;
 
 	xy = (int*)malloc(2 * sizeof(int));
-	xy[0] = 500 - ((struc.xmax / 2) * struc.zoom_coef);
-	xy[1] = 500 - ((struc.ymax / 2) * struc.zoom_coef);
+	xy[0] = 500 - ((struc.xx / 2) * struc.zc);
+	xy[1] = 500 - ((struc.yx / 2) * struc.zc);
 	return (xy);
 }
 
@@ -26,7 +26,7 @@ int		get_zoom_coef(t_data struc)
 {
 	int i;
 
-	i = struc.ymax > struc.xmax ? (1000 / struc.ymax) : (1000 / struc.xmax);
+	i = struc.yx > struc.xx ? (1000 / struc.yx) : (1000 / struc.xx);
 	i = i > 20 ? 22 : i;
 	i = i < 4 ? 4 : i;
 	return (i - 2);

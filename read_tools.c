@@ -6,7 +6,7 @@
 /*   By: yel-kobi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/16 01:14:23 by yel-kobi          #+#    #+#             */
-/*   Updated: 2020/03/05 01:02:31 by yel-kobi         ###   ########.fr       */
+/*   Updated: 2020/03/05 01:24:20 by ytourame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,10 @@ void	parser(t_data *struc, char **saved, int last_len)
 	static int		s;
 
 	x = 0;
-	(struc->data[s]) = (int*)malloc(sizeof(int) * last_len);
+	(struc->dt[s]) = (int*)malloc(sizeof(int) * last_len);
 	while (x < last_len)
 	{
-		struc->data[s][x] = ft_atoi(saved[x]);
+		struc->dt[s][x] = ft_atoi(saved[x]);
 		free(saved[x++]);
 	}
 	free(saved);
@@ -80,7 +80,7 @@ int		count_len(char **argv, t_data *struc)
 
 void	read_file(char **argv, t_data *struc)
 {
-	struc->ymax = count_line(argv);
-	(struc->data) = (int **)malloc(sizeof(int *) * (struc->ymax));
-	struc->xmax = count_len(argv, struc);
+	struc->yx = count_line(argv);
+	(struc->dt) = (int **)malloc(sizeof(int *) * (struc->yx));
+	struc->xx = count_len(argv, struc);
 }

@@ -6,7 +6,7 @@
 /*   By: yel-kobi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/29 01:35:26 by yel-kobi          #+#    #+#             */
-/*   Updated: 2020/03/05 01:02:50 by yel-kobi         ###   ########.fr       */
+/*   Updated: 2020/03/05 01:23:32 by ytourame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,16 @@
 
 void	free_struc(t_data *struc, int code)
 {
-	int x;
 	int y;
 
 	y = 0;
-	if (struc->margin != NULL)
-		free(struc->margin);
-	if (struc->data)
+	if (struc->mr != NULL)
+		free(struc->mr);
+	if (struc->dt)
 	{
-		while (y < struc->ymax)
-			free(struc->data[y++]);
-		struc->data = NULL;
+		while (y < struc->yx)
+			free(struc->dt[y++]);
+		struc->dt = NULL;
 	}
 	if (code == 53)
 		exit(1);
@@ -40,8 +39,8 @@ void	ft_clean(t_data *struc, char **saved, char *buff, int index)
 	free(saved);
 	free(buff);
 	while (index)
-		free(struc->data[--index]);
-	free(struc->data);
+		free(struc->dt[--index]);
+	free(struc->dt);
 	ft_error("Error : Invalid File .|.");
 }
 
