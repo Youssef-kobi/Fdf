@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ytourame <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: yel-kobi <yel-kobi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/03/03 21:28:00 by ytourame          #+#    #+#              #
-#    Updated: 2020/03/05 01:31:28 by ytourame         ###   ########.fr        #
+#    Updated: 2020/03/08 00:06:33 by yel-kobi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,20 +14,17 @@ LIB=libft.a
 
 LIB_DIR=libft/
 
-MINILIBX = $(MINILIBX_DIRECTORY)libmlx.a
-
-MINILIBX_DIRECTORY = ./minilibx_macos/
-
-MINILIBX_HEADERS = $(MINILIBX_DIRECTORY)
-
 NAME=fdf
 
-UNITS= draw_tools hook_tools read_tools param_tools main get_next_line exit_tools
+INCLUDE=include/fdf.h
+
+UNITS=sources/draw_tools sources/hook_tools sources/read_tools sources/param_tools sources/main sources/get_next_line sources/exit_tools 
+
+UNITS_OBJ=draw_tools hook_tools read_tools param_tools main get_next_line exit_tools 
 
 SRC=$(addsuffix .c, $(UNITS))
 
-OBJ=$(addsuffix .o, $(UNITS))
-
+OBJ=$(addsuffix .o, $(UNITS_OBJ))
 CC=cc
 
 CC_FLAGS=-Wall -Werror -Wextra -I.
@@ -35,6 +32,7 @@ CC_FLAGS=-Wall -Werror -Wextra -I.
 all: lib $(NAME)
 
 lib:
+		@make -C $(LIB_DIR)
 		make -C $(LIB_DIR) libft.a
 
 $(NAME): lib
@@ -51,5 +49,5 @@ fclean: clean
 
 re: fclean all
 
-%.o : %.c
+sources/%.o : sources/%.c
 		@$(CC) -Wall -Wextra -Werror -c $< -o $@%
