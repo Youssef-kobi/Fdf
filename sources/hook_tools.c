@@ -6,7 +6,7 @@
 /*   By: yel-kobi <yel-kobi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/27 05:48:51 by yel-kobi          #+#    #+#             */
-/*   Updated: 2020/03/06 17:39:13 by yel-kobi         ###   ########.fr       */
+/*   Updated: 2020/03/08 01:30:37 by yel-kobi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ int		key_hook(int key, void *param)
 	d->mr[1] = key == 126 ? d->mr[1] - 4 : d->mr[1];
 	d->an = key == 116 ? d->an + 0.01 : d->an;
 	d->an = key == 121 ? d->an - 0.01 : d->an;
+	d->zc = d->zc < 1 ? 1 : d->zc;
 	draw(*d);
 	return (0);
 }
